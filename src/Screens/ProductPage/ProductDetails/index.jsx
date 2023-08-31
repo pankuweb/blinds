@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import ImageLazyLoader from "../../Common/Components/ImageLazyLoader";
 import banner_products from "@/assets/images/Picture-products.webp";
 import ProductSize from "./Component/ProductSize";
 import SelectColor from "./Component/SelectColor";
 import Controllers from "./Component/Controllers";
+import SelectionReview from "./Component/SelectionReview";
 const ProductDetails = () => {
-  const handleSlectedColors = (clrObj) => {
-    // console.log(clrObj, "clrObj====>");
+  const [controlSelection, setControlSelection] = useState({});
+  const handleControlSelectionUpdate = (processName, newData) => {
+    setControlSelection((prevData) => ({
+      ...prevData,
+      [processName]: newData,
+    }));
+  };
+  const handleSelectedSize = (sizeObj) => {
+    handleControlSelectionUpdate("sizes", sizeObj);
+  };
+  const handleSelectedColors = (clrObj) => {
+    handleControlSelectionUpdate("colors", clrObj);
+  };
+  const handleSelectedControls = (cntrolsObj) => {
+    handleControlSelectionUpdate("controls", cntrolsObj);
   };
   return (
     <div className="main_product_banner">
@@ -20,11 +34,16 @@ const ProductDetails = () => {
               <div className="border-bottom"></div>
             </div>
             <div className="main_size_section">
-              <ProductSize />
-              <SelectColor
-                getSelectedColor={(item) => handleSlectedColors(item)}
+              <ProductSize
+                getSeletedSizes={(item) => handleSelectedSize(item)}
               />
-              <Controllers />
+              <SelectColor
+                getSelectedColor={(item) => handleSelectedColors(item)}
+              />
+              <Controllers
+                getAllControlDetails={(item) => handleSelectedControls(item)}
+              />
+              <SelectionReview controlsDetails={controlSelection} />
             </div>
           </div>
 

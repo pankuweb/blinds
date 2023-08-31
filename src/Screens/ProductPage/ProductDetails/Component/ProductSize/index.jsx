@@ -1,8 +1,20 @@
+import React, { useEffect, useState } from "react";
 import home_icons from "@/assets/images/home-icons.webp";
 import swap_horiz from "@/assets/images/swap_horiz.svg";
 import Link from "next/link";
 
-const ProductSize = () => {
+const ProductSize = ({ getSeletedSizes }) => {
+  const [sizeSelection, setSizeSelection] = useState({});
+  const handleSizeSelectionUpdate = (processName, newData) => {
+    setSizeSelection((prevData) => ({
+      ...prevData,
+      [processName]: newData,
+    }));
+  };
+  useEffect(() => {
+    getSeletedSizes(sizeSelection);
+  }, [sizeSelection]);
+
   return (
     <section>
       <div className="product_size_section">
@@ -43,6 +55,11 @@ const ProductSize = () => {
                     id="name_20"
                     name="name_20"
                     autoComplete="off"
+                    onChange={(i) =>
+                      handleSizeSelectionUpdate("blind_width_inches", {
+                        width: i?.target?.value,
+                      })
+                    }
                   >
                     <option value="20">20</option>
                     <option value="21">21</option>
@@ -62,6 +79,11 @@ const ProductSize = () => {
                     id="name_0.125"
                     name="name_0.125"
                     autoComplete="off"
+                    onChange={(i) =>
+                      handleSizeSelectionUpdate("blind_width_eighths", {
+                        width: i?.target?.value,
+                      })
+                    }
                   >
                     <option value="0">0/0</option>
                     <option value="0.125">1/8</option>
@@ -89,6 +111,11 @@ const ProductSize = () => {
                     id="name_21"
                     name="name_21"
                     autoComplete="off"
+                    onChange={(i) =>
+                      handleSizeSelectionUpdate("blind_height_inches", {
+                        height: i?.target?.value,
+                      })
+                    }
                   >
                     <option value="20">20</option>
                     <option value="21">21</option>
@@ -108,6 +135,11 @@ const ProductSize = () => {
                     id="name_25"
                     name="name_25"
                     autoComplete="off"
+                    onChange={(i) =>
+                      handleSizeSelectionUpdate("blind_height_eighths", {
+                        height: i?.target?.value,
+                      })
+                    }
                   >
                     <option value="0">0/0</option>
                     <option value="0.125">1/8</option>
