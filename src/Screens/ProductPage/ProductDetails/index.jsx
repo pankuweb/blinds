@@ -5,6 +5,8 @@ import ProductSize from "./Component/ProductSize";
 import SelectColor from "./Component/SelectColor";
 import Controllers from "./Component/Controllers";
 import SelectionReview from "./Component/SelectionReview";
+import Header from "../../Common/Components/Header";
+import Footer from "../../Common/Components/Footer";
 const ProductDetails = () => {
   const [controlSelection, setControlSelection] = useState({});
   const handleControlSelectionUpdate = (processName, newData) => {
@@ -24,6 +26,7 @@ const ProductDetails = () => {
   };
   return (
     <div className="main_product_banner">
+      <Header />
       <div className="container-fluid">
         <div className="row">
           <div className="col-12 col-sm-12 col-md-12 col-lg-5">
@@ -106,6 +109,7 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
