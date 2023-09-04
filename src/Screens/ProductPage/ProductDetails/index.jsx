@@ -7,14 +7,10 @@ import Controllers from "./Component/Controllers";
 import SelectionReview from "./Component/SelectionReview";
 import Header from "../../Common/Components/Header";
 import Footer from "../../Common/Components/Footer";
-<<<<<<< Updated upstream
-const ProductDetails = () => {
-=======
 import { useRouter } from "next/router";
 
 const ProductDetails = ({ productData }) => {
   const router = useRouter();
->>>>>>> Stashed changes
   const [controlSelection, setControlSelection] = useState({});
   const [validPrice, setValidPrice] = useState();
   const handleControlSelectionUpdate = (processName, newData) => {
@@ -37,18 +33,6 @@ const ProductDetails = ({ productData }) => {
   console.log(validPrice, "router====>");
 
   return (
-<<<<<<< Updated upstream
-    <div className="main_product_banner">
-      <Header />
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-12 col-sm-12 col-md-12 col-lg-5">
-            <div className="product_banner_details p-4">
-              <h3 className="text-sm-start text-md-center mb-4">
-                Configure Your Window Treatment
-              </h3>
-              <div className="border-bottom"></div>
-=======
     <div>
       <Header />
       <div className="main_product_banner">
@@ -79,7 +63,6 @@ const ProductDetails = ({ productData }) => {
                   controlsDetails={controlSelection}
                 />
               </div>
->>>>>>> Stashed changes
             </div>
 
             <div className="col-12 col-sm-12 col-md-12 col-lg-7">
