@@ -5,17 +5,16 @@ import {
   trackWindowScroll,
 } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import { manageProductList } from "@/src/redux/actions/products";
+import { manageProductList } from "@/src/Redux/actions/products";
 import { useDispatch, useSelector } from "react-redux";
 const Blind = () => {
+  const distpatch = useDispatch();
+  const list = useSelector((state) => state?.products?.list);
+  useEffect(() => {
+    distpatch(manageProductList());
+  }, []);
 
-  const distpatch = useDispatch()
-  const list = useSelector((state)=>state?.products?.list)
-useEffect(()=>{
-  distpatch(manageProductList())
-},[])
-
-console.log(list,'list==>')
+  console.log(list, "list==>");
 
   return (
     <section>

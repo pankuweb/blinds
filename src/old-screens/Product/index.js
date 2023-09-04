@@ -2,12 +2,12 @@ import Layout from "@/src/components/Layout";
 import BottomAccordion from "./BottomAccordion";
 import Product from "./Product";
 
-const ProductPage = () => {
+const ProductPage = ({ data }) => {
   return (
     <section>
       <Layout>
-        <Product />
-        <BottomAccordion />
+        <Product data={data} />
+        <BottomAccordion data={data} />
       </Layout>
     </section>
   );

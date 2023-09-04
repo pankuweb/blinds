@@ -1,6 +1,6 @@
 import Layout from "@/src/components/Layout";
 import React, { useState } from "react";
-import { loginAuth } from "@/src/redux/actions/auth";
+import { loginAuth } from "@/src/Redux/actions/auth";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";

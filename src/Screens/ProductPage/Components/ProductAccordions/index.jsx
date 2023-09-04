@@ -2,10 +2,18 @@ import Link from "next/link";
 import productId from "@/assets/images/productId-meta.webp";
 import UnoptimizedImage from "@/UnoptimizedImage";
 import ColorCell from "./Components/CollorCell";
-const ProductAccordion = () => {
+const ProductAccordion = ({ productDetails, getDetails, data }) => {
   const handleGetColors = (colorObj) => {
-    // console.log(colorObj, "colorObj===>");
+    getDetails(colorObj);
   };
+
+  const productData = data?.product ? data?.product : "";
+  function titleToSlug(title) {
+    let slug = title?.toLowerCase();
+    slug = slug?.replace(/\s+/g, "-");
+    slug = slug?.replace(/[^a-z0-9-]/g, "");
+    return slug;
+  }
 
   return (
     <section>
@@ -53,7 +61,10 @@ const ProductAccordion = () => {
                             </button>
                             <div className="card-body text-center p-4 p-md-4 p-lg-4">
                               <p className="card-text m-0">
-                                <s>$92.99</s>
+                                <s>
+                                  {productData?.discount_price &&
+                                    `$${productData?.discount_price}`}
+                                </s>
                                 <span
                                   className="ms-1 text-dark fw-medium"
                                   lang="es"
@@ -61,8 +72,22 @@ const ProductAccordion = () => {
                                   SAVE 30%
                                 </span>
                               </p>
-                              <h2 className="card-title mb-3">$65.09</h2>
-                              <Link href="/product/product[1]" className="btn">
+                              <h2 className="card-title mb-3">
+                                {productData?.unit_price &&
+                                  `$${productData?.unit_price}`}
+                              </h2>
+                              <Link
+                                href={{
+                                  pathname: `/product/[slug]/[id]`,
+                                  query: {
+                                    state: JSON.stringify(productDetails),
+                                  },
+                                }}
+                                as={`/product/${productData?.id}/${titleToSlug(
+                                  productData?.title
+                                )}`}
+                                className="btn"
+                              >
                                 Customize and Buy
                               </Link>
                             </div>
@@ -71,6 +96,7 @@ const ProductAccordion = () => {
                       </div>
                       <div className="col-12 col-sm-12 col-md-12 col-lg-8">
                         <ColorCell
+                          colors={productData?.color}
                           getSelectedColor={(item) => handleGetColors(item)}
                         />
                       </div>
@@ -123,7 +149,10 @@ const ProductAccordion = () => {
                           </button>
                           <div className="card-body text-center p-4 p-md-4 p-lg-4">
                             <p className="card-text m-0">
-                              <s>$92.99</s>
+                              <s>
+                                {productData?.discount_price &&
+                                  `$${productData?.discount_price}`}
+                              </s>
                               <span
                                 className="ms-1 text-dark fw-medium"
                                 lang="es"
@@ -131,8 +160,16 @@ const ProductAccordion = () => {
                                 SAVE 30%
                               </span>
                             </p>
-                            <h2 className="card-title mb-3">$65.09</h2>
-                            <Link href="#" className="btn">
+                            <h2 className="card-title mb-3">
+                              {productData?.unit_price &&
+                                `$${productData?.unit_price}`}
+                            </h2>
+                            <Link
+                              href={`/product/${productData?.id}/${titleToSlug(
+                                productData?.title
+                              )}`}
+                              className="btn"
+                            >
                               Customize and Buy
                             </Link>
                           </div>
@@ -158,22 +195,8 @@ const ProductAccordion = () => {
               </h2>
               <div id="collapseTwo" className="accordion-collapse collapse">
                 <div className="accordion-body">
-                  Veneta Designer Blackout Cellular Shades are made from the
-                  finest materials. Perfect for rooms that required light
-                  blocking ability during the day like media rooms, nurseries
-                  and bedrooms for daytime sleepers. Cellular fabrics add
-                  insulation to your windows, helping to regulate interior
-                  temperatures and save on energy costs. Select from a wide
-                  range of colors and patterns to liven up any room. The ultra
-                  slim top-down/bottom-up ClearFit™ style shade, is a Veneta
-                  exclusive product that mounts securely on all four corners of
-                  any window - making it a great solution for French doors and
-                  skylights. The Day & Night shade option combines sheer and
-                  room darkening fabrics for complete light and privacy control.
-                  Choose between five different cell sizes to match your style
-                  and insulation needs. All available lift systems include:
-                  Bottom-Up, Top-Down/Bottom-Up, Day & Night, Motorized,
-                  ClearFit™.
+                  {productData?.long_description &&
+                    productData?.long_description}
                 </div>
               </div>
             </div>
@@ -192,22 +215,8 @@ const ProductAccordion = () => {
               </h2>
               <div id="collapseThree" className="accordion-collapse collapse">
                 <div className="accordion-body">
-                  Veneta Designer Blackout Cellular Shades are made from the
-                  finest materials. Perfect for rooms that required light
-                  blocking ability during the day like media rooms, nurseries
-                  and bedrooms for daytime sleepers. Cellular fabrics add
-                  insulation to your windows, helping to regulate interior
-                  temperatures and save on energy costs. Select from a wide
-                  range of colors and patterns to liven up any room. The ultra
-                  slim top-down/bottom-up ClearFit™ style shade, is a Veneta
-                  exclusive product that mounts securely on all four corners of
-                  any window - making it a great solution for French doors and
-                  skylights. The Day & Night shade option combines sheer and
-                  room darkening fabrics for complete light and privacy control.
-                  Choose between five different cell sizes to match your style
-                  and insulation needs. All available lift systems include:
-                  Bottom-Up, Top-Down/Bottom-Up, Day & Night, Motorized,
-                  ClearFit™.
+                  {productData?.long_description &&
+                    productData?.long_description}
                 </div>
               </div>
             </div>
@@ -226,22 +235,8 @@ const ProductAccordion = () => {
               </h2>
               <div id="collapseFour" className="accordion-collapse collapse">
                 <div className="accordion-body">
-                  Veneta Designer Blackout Cellular Shades are made from the
-                  finest materials. Perfect for rooms that required light
-                  blocking ability during the day like media rooms, nurseries
-                  and bedrooms for daytime sleepers. Cellular fabrics add
-                  insulation to your windows, helping to regulate interior
-                  temperatures and save on energy costs. Select from a wide
-                  range of colors and patterns to liven up any room. The ultra
-                  slim top-down/bottom-up ClearFit™ style shade, is a Veneta
-                  exclusive product that mounts securely on all four corners of
-                  any window - making it a great solution for French doors and
-                  skylights. The Day & Night shade option combines sheer and
-                  room darkening fabrics for complete light and privacy control.
-                  Choose between five different cell sizes to match your style
-                  and insulation needs. All available lift systems include:
-                  Bottom-Up, Top-Down/Bottom-Up, Day & Night, Motorized,
-                  ClearFit™.
+                  {productData?.long_description &&
+                    productData?.long_description}
                 </div>
               </div>
             </div>
@@ -260,22 +255,8 @@ const ProductAccordion = () => {
               </h2>
               <div id="collapseFive" className="accordion-collapse collapse">
                 <div className="accordion-body">
-                  Veneta Designer Blackout Cellular Shades are made from the
-                  finest materials. Perfect for rooms that required light
-                  blocking ability during the day like media rooms, nurseries
-                  and bedrooms for daytime sleepers. Cellular fabrics add
-                  insulation to your windows, helping to regulate interior
-                  temperatures and save on energy costs. Select from a wide
-                  range of colors and patterns to liven up any room. The ultra
-                  slim top-down/bottom-up ClearFit™ style shade, is a Veneta
-                  exclusive product that mounts securely on all four corners of
-                  any window - making it a great solution for French doors and
-                  skylights. The Day & Night shade option combines sheer and
-                  room darkening fabrics for complete light and privacy control.
-                  Choose between five different cell sizes to match your style
-                  and insulation needs. All available lift systems include:
-                  Bottom-Up, Top-Down/Bottom-Up, Day & Night, Motorized,
-                  ClearFit™.
+                  {productData?.long_description &&
+                    productData?.long_description}
                 </div>
               </div>
             </div>

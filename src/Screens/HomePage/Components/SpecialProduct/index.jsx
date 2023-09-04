@@ -32,7 +32,7 @@ const SpecialProduct = () => {
                   </div>
                   <Link
                     className="text-uppercase text-decoration-none text-dark fw-medium btn btn-sm border-0"
-                    href="/product"
+                    href="/product/1"
                   >
                     + Add to cart
                   </Link>
@@ -62,7 +62,7 @@ const SpecialProduct = () => {
                   </div>
                   <Link
                     className="text-uppercase text-decoration-none text-dark fw-medium btn btn-sm border-0"
-                    href="/product"
+                    href="/product/1"
                   >
                     + Add to cart
                   </Link>
@@ -89,7 +89,7 @@ const SpecialProduct = () => {
                   </div>
                   <Link
                     className="text-uppercase text-decoration-none text-dark fw-medium btn btn-sm border-0"
-                    href="/product"
+                    href="/product/1"
                   >
                     + Add to cart
                   </Link>
@@ -118,7 +118,7 @@ const SpecialProduct = () => {
                   </div>
                   <Link
                     className="text-uppercase text-decoration-none text-dark fw-medium btn btn-sm border-0"
-                    href="/product"
+                    href="/product/1"
                   >
                     + Add to cart
                   </Link>
@@ -202,7 +202,7 @@ const SpecialProduct = () => {
                           </div>
                           <Link
                             className="text-uppercase text-decoration-none text-dark fw-medium btn btn-sm border-0"
-                            href="/product"
+                            href="/product/1"
                           >
                             + Add to cart
                           </Link>
@@ -234,7 +234,7 @@ const SpecialProduct = () => {
                           </div>
                           <Link
                             className="text-uppercase text-decoration-none text-dark fw-medium btn btn-sm border-0"
-                            href="/product"
+                            href="/product/1"
                           >
                             + Add to cart
                           </Link>

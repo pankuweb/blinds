@@ -3,7 +3,7 @@ import product from "@/assets/images/product_image.webp";
 import bgProduct from "@/assets/images/news+products.webp";
 import UnoptimizedImage from "@/UnoptimizedImage";
 import { useDispatch, useSelector, connect } from "react-redux";
-import { manageProductList } from "@/src/redux/actions/products";
+import { manageProductList } from "@/src/Redux/actions/products";
 import { useEffect } from "react";
 
 const Products = ({ is_loading, productList, notFoundData }) => {

@@ -1,5 +1,6 @@
 import Card from "@/src/old-screens/Card/Card";
 import Head from "next/head";
+import Cart from "@/src/Screens/Cart";
 
 const index = () => {
   return (
@@ -11,7 +12,7 @@ const index = () => {
           content="width=device-width, initial-scale=1.0"
         />
       </Head>
-      <Card />
+      <Cart />
     </section>
   );
 };

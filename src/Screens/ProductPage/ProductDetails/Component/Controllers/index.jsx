@@ -12,7 +12,7 @@ import {
   shippingMethods,
 } from "./data";
 
-const Controllers = ({ getAllControlDetails }) => {
+const Controllers = ({ productData, getAllControlDetails }) => {
   const initialIndice = constrols && constrols[0]?.id;
   const [activeIndex, setActiveIndex] = useState(initialIndice);
   const [activeCntrlFirtsTime, setActiveCntrlFirtsTime] = useState(true);
@@ -123,8 +123,8 @@ const Controllers = ({ getAllControlDetails }) => {
         <div className="mb-3"></div>
         {titlControls?.map((tilts, tiltsIndex) => {
           return (
-            <>
-              <div key={tiltsIndex}>
+            <div key={tiltsIndex}>
+              <div>
                 {tilts?.tiltes &&
                   tilts?.tiltes?.map((item, tiltIndex) => {
                     return (
@@ -230,7 +230,7 @@ const Controllers = ({ getAllControlDetails }) => {
                     )}
                 </div>
               )}
-            </>
+            </div>
           );
         })}
         <div className="mb-3"></div>

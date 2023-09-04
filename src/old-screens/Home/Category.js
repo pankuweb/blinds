@@ -1,6 +1,6 @@
 import category from "@/assets/images/category+online-shopping.webp";
 import categorybg from "@/assets/images/category-banner.webp";
-import { manageProductList } from "@/src/redux/actions/products";
+import { manageProductList } from "@/src/Redux/actions/products";
 import UnoptimizedImage from "@/UnoptimizedImage";
 import { useEffect } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";

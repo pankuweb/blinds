@@ -3,7 +3,7 @@ import home_icons from "@/assets/images/home-icons.webp";
 import swap_horiz from "@/assets/images/swap_horiz.svg";
 import Link from "next/link";
 
-const ProductSize = ({ getSeletedSizes }) => {
+const ProductSize = ({ productData, getSeletedSizes }) => {
   const [sizeSelection, setSizeSelection] = useState({});
   const handleSizeSelectionUpdate = (processName, newData) => {
     setSizeSelection((prevData) => ({
@@ -15,6 +15,19 @@ const ProductSize = ({ getSeletedSizes }) => {
     getSeletedSizes(sizeSelection);
   }, [sizeSelection]);
 
+  const heightAndWidth = (startPoint, endPoint, text) => {
+    const options = [];
+    for (let i = startPoint; i <= endPoint; i++) options.push(i);
+    return options.map((option, index) => {
+      return (
+        <option key={index}>
+          {option}
+          {text}
+        </option>
+      );
+    });
+  };
+  const blindDetails = productData && productData?.product;
   return (
     <section>
       <div className="product_size_section">
@@ -51,9 +64,8 @@ const ProductSize = ({ getSeletedSizes }) => {
               <div className="main-gap-section d-flex align-items-center gap-3 m-0">
                 <div className="gcc-dropdown position-relative">
                   <select
-                    defaultValue="20"
                     id="name_20"
-                    name="name_20"
+                    name="blindWidth"
                     autoComplete="off"
                     onChange={(i) =>
                       handleSizeSelectionUpdate("blind_width_inches", {
@@ -61,10 +73,10 @@ const ProductSize = ({ getSeletedSizes }) => {
                       })
                     }
                   >
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
+                    {heightAndWidth(
+                      blindDetails?.width_from,
+                      blindDetails?.width_to
+                    )}
                   </select>
                   <label
                     className="form-label position-absolute top-0 start-0 z-10 text-dark"
@@ -75,7 +87,6 @@ const ProductSize = ({ getSeletedSizes }) => {
                 </div>
                 <div className="position-relative">
                   <select
-                    defaultValue="0"
                     id="name_0.125"
                     name="name_0.125"
                     autoComplete="off"
@@ -107,9 +118,8 @@ const ProductSize = ({ getSeletedSizes }) => {
               <div className="main-gap-section d-flex align-items-center gap-3 m-0">
                 <div className="gcc-dropdown position-relative">
                   <select
-                    defaultValue="20"
                     id="name_21"
-                    name="name_21"
+                    name="blindHeight"
                     autoComplete="off"
                     onChange={(i) =>
                       handleSizeSelectionUpdate("blind_height_inches", {
@@ -117,10 +127,10 @@ const ProductSize = ({ getSeletedSizes }) => {
                       })
                     }
                   >
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
+                    {heightAndWidth(
+                      blindDetails?.height_from,
+                      blindDetails?.height_to
+                    )}
                   </select>
                   <label
                     className="form-label position-absolute top-0 start-0 z-10 text-dark"

@@ -12,7 +12,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useEffect, useState } from "react";
 
-const DesignBlinds = () => {
+const DesignBlinds = ({ productDetails, getDetails, data }) => {
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
   const [slider1, setSlider1] = useState(null);
@@ -80,6 +80,44 @@ const DesignBlinds = () => {
     },
   ];
 
+  const heightAndWidth = (startPoint, endPoint, text) => {
+    const options = [];
+    for (let i = startPoint; i <= endPoint; i++) options.push(i);
+    return options.map((option, index) => {
+      return (
+        <option key={index}>
+          {option}
+          {text}
+        </option>
+      );
+    });
+  };
+
+  function titleToSlug(title) {
+    let slug = title?.toLowerCase();
+    slug = slug?.replace(/\s+/g, "-");
+    slug = slug?.replace(/[^a-z0-9-]/g, "");
+    return slug;
+  }
+
+  const [design, setDesign] = useState({
+    blindWidth: "",
+    blindHeight: "",
+    price: 20,
+  });
+
+  const handleOnChange = (event) => {
+    const { name, value } = event?.target;
+    setDesign({
+      ...design,
+      [name]: value,
+    });
+  };
+
+  useEffect(() => {
+    getDetails(design);
+  }, [design]);
+
   return (
     <section>
       <div className="Product_page_section">
@@ -103,7 +141,7 @@ const DesignBlinds = () => {
             <div className="row">
               <div className="col-12 col-sm-12 col-md-12 col-lg-6 mt-3 mt-lg-5">
                 <h1 className="fs-2 fw-normal ">
-                  Designer Light Filtering Cellular Shades
+                  {data?.product?.title && data?.product?.title}
                 </h1>
                 <div className="">
                   Brand :
@@ -180,10 +218,8 @@ const DesignBlinds = () => {
                 </div>
                 <div className="fw-normal">
                   <p>
-                    Veneta Designer Light Filtering Cellular Shades are made
-                    from premium cellular fabrics. Let softly diffused sunlight
-                    into your home through a variety of light filtering colors
-                    and patterns.
+                    {data?.product?.long_description &&
+                      data?.product?.long_description}
                     <Link href="#">Read More.</Link>
                   </p>
                 </div>
@@ -220,15 +256,15 @@ const DesignBlinds = () => {
                       <img src={swap_horiz.src} alt="swap_horiz" />
                       <div className="gcc-dropdown position-relative">
                         <select
-                          defaultValue="20"
-                          id="name20"
-                          name="name20"
+                          defaultValue="0"
+                          id="name0.125"
+                          name="blindWidth"
                           autoComplete="off"
                         >
-                          <option value="20">20</option>
-                          <option value="21">21</option>
-                          <option value="22">22</option>
-                          <option value="23">23</option>
+                          {heightAndWidth(
+                            data?.product?.width_from,
+                            data?.product?.width_to
+                          )}
                         </select>
                         <label
                           className="form-label position-absolute top-0 start-0 z-10 text-dark"
@@ -262,15 +298,16 @@ const DesignBlinds = () => {
                       <img src={swap_vert.src} alt="swap_vert" />
                       <div className="position-relative">
                         <select
-                          defaultValue="20"
+                          defaultValue={data?.product?.height_from}
                           id="name21"
-                          name="name21"
+                          name="blindHeight"
                           autoComplete="off"
+                          onChange={(i) => handleOnChange(i)}
                         >
-                          <option value="20">20</option>
-                          <option value="21">21</option>
-                          <option value="22">22</option>
-                          <option value="23">23</option>
+                          {heightAndWidth(
+                            data?.product?.height_from,
+                            data?.product?.height_to
+                          )}
                         </select>
                         <label
                           className="form-label position-absolute top-0 start-0 z-10 text-dark"
@@ -301,11 +338,20 @@ const DesignBlinds = () => {
                   </div>
                   <div className="text-center">
                     <p className="m-0">
-                      $92.99
+                      {data?.product?.discount_price &&
+                        `$${data?.product?.discount_price}`}
                       <span className="ms-1 text-danger">SAVE 30%</span>
                     </p>
-                    <h2 className="mb-3">$65.09</h2>
-                    <Link href="/product/id" className="customize_btn">
+                    <h2 className="mb-3">
+                      {data?.product?.unit_price &&
+                        `$${data?.product?.unit_price}`}
+                    </h2>
+                    <Link
+                      href={`/product/${data?.product?.id}/${titleToSlug(
+                        data?.product?.title
+                      )}`}
+                      className="customize_btn"
+                    >
                       Customize & Buy
                     </Link>
                   </div>
@@ -337,8 +383,8 @@ const DesignBlinds = () => {
                       asNavFor={nav2}
                       ref={(slider) => setSlider1(slider)}
                     >
-                      {slidesData.map((slide) => (
-                        <div className="slick-slide" key={slide.id}>
+                      {slidesData.map((slide, ind) => (
+                        <div className="slick-slide" key={ind}>
                           <img
                             className="slick-slide-image"
                             src={slide.img}
@@ -353,8 +399,8 @@ const DesignBlinds = () => {
                         asNavFor={nav1}
                         ref={(slider) => setSlider2(slider)}
                       >
-                        {slidesData.map((slide) => (
-                          <div className="slick-slide" key={slide.id}>
+                        {slidesData.map((slide, ind) => (
+                          <div className="slick-slide" key={ind}>
                             <img
                               className="slick-slide-image"
                               src={slide.img}

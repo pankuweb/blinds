@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { addToCart } from "@/src/Redux/actions/products";
 
-const SelectionReview = ({ controlsDetails }) => {
+const SelectionReview = ({ controlsDetails, validPriceGet }) => {
   const [productPrice, setProductPrice] = useState(null);
   const [selectionDetails, setSelectionDetails] = useState(null);
   const handleSetDetails = (data) => {
@@ -49,6 +50,20 @@ const SelectionReview = ({ controlsDetails }) => {
     return productPrice;
   };
 
+  // mange price
+  const [validPrice, setValidPrice] = useState();
+  const [quantity, setQuantity] = useState(1);
+
+  const handleMangePrice = (qunt, price) => {
+    if (qunt === "" || qunt <= 0 || qunt === null) {
+      return price;
+    }
+    return price * qunt;
+  };
+  useEffect(() => {
+    setValidPrice(handleMangePrice(quantity, productPrice));
+  }, [quantity, productPrice]);
+
   useEffect(() => {
     if (!controlsDetails) return;
     handleSetDetails(controlsDetails);
@@ -57,6 +72,12 @@ const SelectionReview = ({ controlsDetails }) => {
 
   const { sizes, colors, controls } = selectionDetails ? selectionDetails : "";
 
+  const handleAddToCartItems = () => {
+    addToCart(selectionDetails);
+  };
+  useEffect(() => {
+    validPriceGet(validPrice);
+  }, [validPrice]);
   return (
     <div className="select_bottom_section">
       <div className="mb-3"></div>
@@ -209,7 +230,15 @@ const SelectionReview = ({ controlsDetails }) => {
         <div className="d-flex justify-content-between">
           <div className="fw-semibold">Free*</div>
           <div>
-            <input type="number" name="number" id="number" autoComplete="off" />
+            <input
+              type="number"
+              name="quantity"
+              id="number"
+              value={quantity}
+              min={1}
+              onChange={(i) => setQuantity(i?.target?.value)}
+              autoComplete="off"
+            />
           </div>
 
           <div className="text-end">
@@ -221,14 +250,19 @@ const SelectionReview = ({ controlsDetails }) => {
                 Save 30%
               </span>
             </small>
-            <p>{`$${productPrice?.toFixed(2)}`}</p>
+            <p>{`$${validPrice?.toFixed(2)}`}</p>
           </div>
         </div>
         <div className="mb-3"></div>
         <div className="add-select-cart-section">
-          <Link href="#" className="add-cart-button">
+          <button
+            style={{ background: "none ", border: 0 }}
+            href="#"
+            onClick={() => handleAddToCartItems()}
+            className="add-cart-button"
+          >
             Add To Cart
-          </Link>
+          </button>
         </div>
       </div>
     </div>

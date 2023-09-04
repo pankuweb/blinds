@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Formik } from "formik";
 import { SignupSchema } from "../validations/authSchema";
 import { useDispatch } from "react-redux";
-import { registerAuth } from "@/src/redux/actions/auth";
+import { registerAuth } from "@/src/Redux/actions/auth";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import { ToastContainer } from "react-toastify";

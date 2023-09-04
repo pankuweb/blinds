@@ -2,7 +2,7 @@ import ColorCard from "../ColorCard";
 import { useEffect, useState } from "react";
 import { product_colors } from "../../content";
 
-const ColorCell = ({ getSelectedColor }) => {
+const ColorCell = ({ colors, getSelectedColor }) => {
   const initialActiveIndice =
     product_colors && product_colors?.[0]?.colors[0]?.id;
   const [activeIndice, setActiveIndice] = useState(initialActiveIndice);
@@ -33,23 +33,24 @@ const ColorCell = ({ getSelectedColor }) => {
     <section>
       <div className="available_right_section">
         <h3 className="fw-semibold mb-3">Color</h3>
-        {product_colors &&
-          product_colors.map((item, categoryIndex) => {
+
+        {colors &&
+          colors?.map((item, categoryIndex) => {
             return (
               <div className="color-box" key={categoryIndex}>
-                <h5 className="fw-normal mb-3 mt-3">{item?.color_cat_title}</h5>
+                <h5 className="fw-normal mb-3 mt-3">{item?.name}</h5>
                 <div className="available_grid-column">
                   {item?.colors &&
-                    item?.colors.map((clr) => {
+                    item?.colors?.map((clr, clrIndex) => {
                       return (
                         <ColorCard
-                          key={clr?.id}
+                          key={clrIndex}
                           onClick={() =>
                             handleImageClick(clr?.id, {
-                              color_category_name: item?.color_cat_title,
+                              color_category_name: item?.name,
                               color_name: clr?.name,
                               color_price: clr?.price,
-                              color_code: clr?.color_code,
+                              color_code: clr?.colorCode,
                             })
                           }
                           color={clr}

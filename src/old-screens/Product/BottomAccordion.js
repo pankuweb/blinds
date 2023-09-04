@@ -3,7 +3,9 @@ import productId from "@/assets/images/productId-meta.webp";
 import ProductCommon from "./ProductCommon";
 import UnoptimizedImage from "@/UnoptimizedImage";
 
-const BottomAccordion = () => {
+const BottomAccordion = ({ data }) => {
+  console.log(data?.product?.color, "data====>");
+
   return (
     <section>
       <div className="main_accordion_section">
@@ -59,7 +61,10 @@ const BottomAccordion = () => {
                                 </span>
                               </p>
                               <h2 className="card-title mb-3">$65.09</h2>
-                              <Link href="/product/product[1]" className="btn">
+                              <Link
+                                href="/product/1/custome-product"
+                                className="btn"
+                              >
                                 Customize and Buy
                               </Link>
                             </div>
@@ -128,7 +133,10 @@ const BottomAccordion = () => {
                               </span>
                             </p>
                             <h2 className="card-title mb-3">$65.09</h2>
-                            <Link href="#" className="btn">
+                            <Link
+                              href="/product/1/custome-product"
+                              className="btn"
+                            >
                               Customize and Buy
                             </Link>
                           </div>
