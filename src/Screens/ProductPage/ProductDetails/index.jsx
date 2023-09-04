@@ -30,7 +30,6 @@ const ProductDetails = ({ productData }) => {
   };
 
   const { query } = router;
-  console.log(validPrice, "router====>");
 
   return (
     <div>
